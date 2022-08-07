@@ -181,6 +181,9 @@ open class FSPagerViewTransformer: NSObject {
             // http://ronnqvi.st/translate-rotate-translate/
             var zIndex = 0
             var transform = CGAffineTransform.identity
+            let scaleFactor = max(self.minimumScale, 1 - abs(position)*(1-self.minimumScale))
+            transform.a = scaleFactor
+            transform.d = scaleFactor
             switch position {
             case -5 ... 5:
                 let itemSpacing = attributes.bounds.width+self.proposedInteritemSpacing()
@@ -260,7 +263,7 @@ open class FSPagerViewTransformer: NSObject {
             guard scrollDirection == .horizontal else {
                 return 0
             }
-            return -pagerView.itemSize.width * 0.15
+            return pagerView.itemSize.width * 0.25
         case .cubic:
             return 0
         default:
