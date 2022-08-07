@@ -28,7 +28,7 @@ open class FSPagerViewTransformer: NSObject {
     
     @objc open var minimumScale: CGFloat = 0.65
     @objc open var minimumAlpha: CGFloat = 0.6
-    
+    @objc open var wheelOffsetScale = 0.1
     @objc
     public init(type: FSPagerViewTransformerType) {
         self.type = type
@@ -263,7 +263,7 @@ open class FSPagerViewTransformer: NSObject {
             guard scrollDirection == .horizontal else {
                 return 0
             }
-            return pagerView.itemSize.width * 0.25
+            return pagerView.itemSize.width * wheelOffsetScale
         case .cubic:
             return 0
         default:
